@@ -1,7 +1,7 @@
 <template>
     <div class="fondo">
         <center><h2 class="color">Estas son sus fichas médicas</h2></center>
-        <!-- <v-select
+        <v-select
             :items="[
                 'LUNES',
                 'MARTES',
@@ -15,7 +15,7 @@
             label="DiA"
             v-model="Search"
             @change="listFichasPaciente"
-        ></v-select> -->
+        ></v-select>
         <v-row dense>
             <v-col cols="4" v-for="fp in fichasPaciente" :key="fp.key">
                 <v-card
@@ -126,7 +126,7 @@ export default {
                             version: "1",
                             PageSize: 1000,
                             PageNumber: 1,
-                            Search: this.Search,
+                            Search: this.usuario.nombre,
                         },
                     }
                 )
@@ -222,8 +222,7 @@ export default {
         },
     },
     created() {
-        this.listDoctores();
-        this.listFichasPaciente();
+        
 
         this.usuario = JSON.parse(localStorage.getItem("Usuario"));
         if (this.usuario == null) {
@@ -232,6 +231,9 @@ export default {
         } else {
             this.logueado = true;
         }
+
+        this.listDoctores();
+        this.listFichasPaciente();
         // this.initialize();
     },
 };
